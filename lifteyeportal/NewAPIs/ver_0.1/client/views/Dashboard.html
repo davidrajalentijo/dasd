@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dashboard">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LiftEye</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="../controllers/dashboardController.js"></script>
+    <script type="text/javascript" src="https://code.angularjs.org/1.3.9/angular-resource.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="../dist/css/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-controller="mainController">
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+
+
+
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li ng-click="modal()"><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+
+                                    <li class="divider"></li>
+                    <li ng-click="logout()" ><a ><i  class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="sidebar-search">
+                        <div align="center"> <img src="../img/Logo_LiftEye.jpg" align="center"> </div>
+
+                        <!-- /input-group -->
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Operación</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Informes<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">Facturas</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Gestión</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="tables.html"><i class="fa fa-table fa-fw"></i> LiftEye<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">Tarifas</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Cobros</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">VBP</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Logs</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Grupos<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">Programaciones</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Registro Configuraciones</a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Configuración<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">Configuración Alertas/Eventos</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Clientes</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Alta tarjetas/Instalaciones</a>
+                            </li>
+
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <div id="page-wrapper" >
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Operación</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row" >
+            <div class="col-lg-8 col-md-8">
+                <div class="panel " STYLE="background-color: #eaeaea">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                            </div>
+                            <div class="col-xs-9 text-right">
+
+
+                            </div>
+                        </div>
+                        <div class="input-group custom-search-form">
+                            <input ng-model="searchText" type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="input-group" ng-init="getgrupos">
+                        <h>Instalaciones: {{longitud.length}}</h>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                                <div align="center">Grupos</div>
+
+                        </div>
+                    </div>
+                    <div class="table-responsive" ng-init="getGroups">
+                        <table class="table">
+                        <tr ng-repeat="grupo in grupos">
+                   <td align="center">  {{grupo.groupname}} <button type="button" class="btn btn-info">Instalaciones</button></td>
+
+
+</tr></table>
+                </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- /.panel -->
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div >
+                            <table class="table table-bordered table-hover table-striped dataTable no-footer" data-sort-name="name" data-sort-order="desc">
+                                <tr role = "row" class="info text-center">
+                                    <th ng-click="order('msisdn')">Número Teléfono</th>
+                                    <th ng-click="order('icc')">ICC</th>
+                                    <th ng-click="order('imei')">IMEI</th>
+                                    <!--th>IMEI</th-->
+                                    <th ng-click="order('ActivationStatus')">Estado</th>
+                                    <th ng-click="order('sitename')">Instalación</th>
+                                    <th ng-click="order('siteaddress')">Dirección</th>
+                                    <th ng-click="order('sitecity')">Ciudad</th>
+                                    <th ng-click="order('sitezip')">Código Postal</th>
+
+                                    <th ng-click="order('phonedesc')">Modelo Teléfono</th>
+                                    <th ng-click="order('ContractingMode')">VBP</th>
+
+
+                                </tr>
+
+
+                                <tr class=" text-center" ng-repeat-start="object in objects | filter:searchText | filter:tableFilter | orderBy:predicate:reverse" ng-click="main.activeRow = object.icc" >
+                                    <td>{{object.msisdn}}</td>
+                                    <td>{{object.icc}}</td>
+                                    <td>{{object.imei}}</td>
+                                    <td>{{object.ActivationStatus}}</td>
+                                    <td>{{object.sitename}}</td>
+                                    <td>{{object.siteaddress}}</td>
+                                    <td>{{object.sitecity}}</td>
+                                    <td>{{object.sitezip}}</td>
+
+                                    <td>{{object.phonedesc}}</td>
+                                    <td>{{ object.ContractingMode ? 'Yes': 'No'}}</td>
+
+
+
+
+
+                                </tr>
+
+                                <tr ng-repeat-end ng-show="main.activeRow==object.icc">
+                                    <td colspan="3"> <a>Fecha Activación:</a> <div> {{object.DateActivation}}</div> <div><a> Fecha Baja</a> {{object.DateDisconnection}}</div> <div><a> Último Evento HW</a> {{object.LastHWEvent}}</div></td>
+                                    <td colspan="4"> <a>Último Evento Humano:</a> <div> {{object.LastHumanEvent}}</div> <div><a> Último Evento Test</a> {{object.LastTestEvent}}</div> <a>Comentarios:</a> <div> {{object.comments}}</div> </td>
+                                    <td colspan="2"> <div><a> Rae1: </a> {{object.rae1}}</div>  <div><a> Rae2: </a> {{object.rae2}}</div> <a>Pin1:</a> <div> {{object.pin1}}</div> <div><a> Pin2: </a> {{object.pin2}}</div></td>
+                                    <td colspan="1"> <div><button type="button" class="btn btn-info" ng-click="getevent(object)" ng-model="eventoss">Eventos</button></div>  </td>
+
+                                     </tr>
+
+
+
+
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+
+
+
+
+                    </div>
+                    <!-- /.col-lg-4 (nested) -->
+
+                    <!-- /.col-lg-8 (nested) -->
+                </div>
+                <!-- /.row -->
+                <table class="table table-bordered table-hover table-striped dataTable no-footer" ng-hide="eventoss" >
+                    <tr role = "row" class="info text-center">
+                        <th >Fecha</th>
+                        <th >Tipo Evento</th>
+                        <th >Origen Evento</th>
+
+                    </tr>
+
+
+                    <tr class=" text-center" ng-repeat="event in events | pagination : currentPage*itemsPerPage | limitTo: itemsPerPage"  >
+                        <td>{{event.eventtime}}</td>
+                        <td>{{event.eventtype}}</td>
+                        <td>{{event.parenttype}}</td>
+
+
+
+
+
+                    </tr>
+
+
+
+
+
+
+                </table><div class="pagination-div">
+
+                <ul class="pagination">
+
+                    <li ng-class="DisablePrevPage()">
+
+                        <a href ng-click="prevPage()"> Prev</a>
+
+                    </li>
+
+                    <li ng-repeat="n in range()"
+
+                        ng-class="{active: n == currentPage}"
+
+                        ng-click="setPage(n)">
+
+                        <a href="#">{{n+1}}</a>
+
+                    </li>
+
+                    <li ng-class="DisableNextPage()">
+
+                        <a href ng-click="nextPage()">Next </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+
+        <!-- /.panel -->
+
+        <!-- /.col-lg-4 -->
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /#page-wrapper -->
+
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+<!-- Morris Charts JavaScript -->
+<script src="../bower_components/raphael/raphael-min.js"></script>
+<script src="../bower_components/morrisjs/morris.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>

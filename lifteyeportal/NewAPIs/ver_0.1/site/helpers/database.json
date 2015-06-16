@@ -1,0 +1,18 @@
+{
+  "dev": {
+	"driver": "mysql",
+	"user": "root",
+	"database": "lift",
+	"password": "",
+	"host": "localhost"
+  },
+  "production": {
+	"driver": "mysql",
+	"user": "process.env.RDS_USERNAME",
+	"database": "ebdb",
+	"password": "process.env.RDS_PASSWORD",
+	"host": "process.env.RDS_HOSTNAME"
+  }
+}
+
+
