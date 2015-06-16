@@ -10,10 +10,13 @@
     <meta name="author" content="">
 
     <title>LiftEye</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
     <script src="../controllers/dashboardController.js"></script>
+
     <script type="text/javascript" src="https://code.angularjs.org/1.3.9/angular-resource.js"></script>
 
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -40,7 +43,7 @@
 
 </head>
 
-<body ng-controller="mainController">
+<body ng-controller="dashboardController">
 
 <div id="wrapper">
 
@@ -205,7 +208,7 @@
                     <div class="table-responsive" ng-init="getGroups">
                         <table class="table">
                         <tr ng-repeat="grupo in grupos">
-                   <td align="center">  {{grupo.groupname}} <button type="button" class="btn btn-info">Instalaciones</button></td>
+                   <td align="center">  {{grupo}} <button type="button" class="btn btn-info">Instalaciones</button></td>
 
 
 </tr></table>
@@ -269,8 +272,72 @@
                                     <td colspan="3"> <a>Fecha Activación:</a> <div> {{object.DateActivation}}</div> <div><a> Fecha Baja</a> {{object.DateDisconnection}}</div> <div><a> Último Evento HW</a> {{object.LastHWEvent}}</div></td>
                                     <td colspan="4"> <a>Último Evento Humano:</a> <div> {{object.LastHumanEvent}}</div> <div><a> Último Evento Test</a> {{object.LastTestEvent}}</div> <a>Comentarios:</a> <div> {{object.comments}}</div> </td>
                                     <td colspan="2"> <div><a> Rae1: </a> {{object.rae1}}</div>  <div><a> Rae2: </a> {{object.rae2}}</div> <a>Pin1:</a> <div> {{object.pin1}}</div> <div><a> Pin2: </a> {{object.pin2}}</div></td>
-                                    <td colspan="1"> <div><button type="button" class="btn btn-info" ng-click="getevent(object)" ng-model="eventoss">Eventos</button></div>  </td>
 
+                                    <td colspan="1"> <div> <button class="btn btn-info" ng-click="open(object)">Eventos</button></div>  </td>
+                                    <div >
+                                        <script type="text/ng-template" id="myModalContent.html">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title">Eventos</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th >Fecha</th>
+                                                        <th >Tipo Evento</th>
+                                                        <th >Origen Evento</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-repeat="evento in eventos | pagination : currentPage*itemsPerPage | limitTo: itemsPerPage">
+
+                                                        <td>{{evento.eventtime}}</td>
+                                                        <td>{{evento.eventtype}}</td>
+                                                        <td>{{evento.parenttype}}</td>
+
+
+                                                    </tr></tbody></table>
+
+
+                                            </div>
+                                            <div class="pagination-div">
+
+                                                <ul class="pagination">
+
+                                                    <li ng-class="DisablePrevPage()">
+
+                                                        <a href ng-click="prevPage()"> Prev</a>
+
+                                                    </li>
+
+                                                    <li ng-repeat="n in range()"
+
+                                                        ng-class="{active: n == currentPage}"
+
+                                                        ng-click="setPage(n)">
+
+                                                        <a href="#">{{n+1}}</a>
+
+                                                    </li>
+
+                                                    <li ng-class="DisableNextPage()">
+
+                                                        <a href ng-click="nextPage()">Next </a>
+
+                                                    </li>
+
+                                                </ul>
+
+                                            </div>
+
+                                            <div class="modal-footer">
+
+                                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                                            </div>
+                                        </script>
+
+
+                                        </div>
                                      </tr>
 
 
@@ -288,61 +355,9 @@
 
                     <!-- /.col-lg-8 (nested) -->
                 </div>
-                <!-- /.row -->
-                <table class="table table-bordered table-hover table-striped dataTable no-footer" ng-hide="eventoss" >
-                    <tr role = "row" class="info text-center">
-                        <th >Fecha</th>
-                        <th >Tipo Evento</th>
-                        <th >Origen Evento</th>
-
-                    </tr>
-
-
-                    <tr class=" text-center" ng-repeat="event in events | pagination : currentPage*itemsPerPage | limitTo: itemsPerPage"  >
-                        <td>{{event.eventtime}}</td>
-                        <td>{{event.eventtype}}</td>
-                        <td>{{event.parenttype}}</td>
 
 
 
-
-
-                    </tr>
-
-
-
-
-
-
-                </table><div class="pagination-div">
-
-                <ul class="pagination">
-
-                    <li ng-class="DisablePrevPage()">
-
-                        <a href ng-click="prevPage()"> Prev</a>
-
-                    </li>
-
-                    <li ng-repeat="n in range()"
-
-                        ng-class="{active: n == currentPage}"
-
-                        ng-click="setPage(n)">
-
-                        <a href="#">{{n+1}}</a>
-
-                    </li>
-
-                    <li ng-class="DisableNextPage()">
-
-                        <a href ng-click="nextPage()">Next </a>
-
-                    </li>
-
-                </ul>
-
-            </div>
 
 
 

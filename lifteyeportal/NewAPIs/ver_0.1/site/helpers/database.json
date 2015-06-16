@@ -1,17 +1,17 @@
 {
   "dev": {
 	"driver": "mysql",
-	"user": "root",
-	"database": "lift",
-	"password": "",
-	"host": "localhost"
+	"user": "updater",
+	"database": "emby_lifts",
+	"password": "cocoliso",
+	"host": "176.34.99.214"
   },
   "production": {
 	"driver": "mysql",
-	"user": "process.env.RDS_USERNAME",
-	"database": "ebdb",
-	"password": "process.env.RDS_PASSWORD",
-	"host": "process.env.RDS_HOSTNAME"
+	"user": "updater",
+	"database": "emby_lifts",
+	"password": "cocoliso",
+	"host": "lifteye.c6n5djj2s5hk.eu-west-1.rds.amazonaws.com"
   }
 }
 

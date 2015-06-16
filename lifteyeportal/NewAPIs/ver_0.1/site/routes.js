@@ -5,7 +5,7 @@ module.exports = function(app) {
 	   console.log(req.method, req.url);
 	   next();					// continue doing what we were doing and go to the route
 	   });
-	app.set('views', 'c:/Users/david/Desktop/web/lifteyeportal/NewAPIs/ver_0.1/client/views');
+	app.set('views', 'c:/Users/david/Desktop/website/dasd/lifteyeportal/NewAPIs/ver_0.1/client/views');
 console.log(__dirname);
 	app.engine('html', require('ejs').renderFile);
 	app.set('view engine', 'html');
@@ -24,7 +24,7 @@ console.log(__dirname);
 		res.render('index.html');
 	});
 	app.get('/dashboard', function(req, res) {
-		res.sendfile('NewAPIs/ver_0.1/client/views/Dashboard.html');
+		res.render('Dashboard.html');
 	});
 	app.get('/api', function(req,res) {
 		res.send( 'Library API is running' );
